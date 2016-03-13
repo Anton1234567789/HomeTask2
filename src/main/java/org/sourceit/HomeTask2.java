@@ -1,7 +1,6 @@
 package org.sourceit;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+
 
 public class HomeTask2 {
 
@@ -12,12 +11,14 @@ public class HomeTask2 {
      * @return бинарная форма числа
      */
     public static long decimalToBinary(int number) {
-        if (number > 0) {
+
+       /* if (number > 0) {
             System.out.println("number " + number + " v binary = " + Integer.toBinaryString(number));
         } else {
             return 0;
-        }
+        }*/
 
+        System.out.println(Integer.toBinaryString(number));
         return number;
     }
 
@@ -43,13 +44,16 @@ public class HomeTask2 {
      * @return хексовая форма числа
      */
     public static long decimalToHex(int number) {
+
         if (number > 0) {
             System.out.println("number " + number + " v hex = " + Integer.toHexString(number));
-        } else {
+
+        } else if (number<0){
             return 0;
         }
-        return number;
+        return 1;
     }
+
 
     /**
      * Конвертирует бинарную форму в десятичное число
@@ -57,12 +61,10 @@ public class HomeTask2 {
      * @param binary бинарная форма, может быть только позитивным
      * @return десятичное число
      */
-    public static int binaryToDecimal(long binary)throws Exception {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        String decimal = reader.readLine();
+    public static int binaryToDecimal(long binary) {
 
-        System.out.println(Integer.parseInt(decimal, 2));
-        return 1;
+
+        return Integer.parseInt(Long.toString(binary));
     }
 
     /**
@@ -71,12 +73,10 @@ public class HomeTask2 {
      * @param octal октальная форма, может быть только позитивным
      * @return десятичное число
      */
-    public static int octalToDecimal(long octal)throws Exception {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        String oct = reader.readLine();
+    public static int octalToDecimal(long octal){
 
-        System.out.println(Integer.parseInt(oct, 8));
-        return 1;
+
+        return Integer.parseInt(Long.toString(octal,10));
     }
 
     /**
@@ -85,12 +85,10 @@ public class HomeTask2 {
      * @param hex хексовая форма, может быть только позитивным
      * @return десятичное число
      */
-    public static int hexToDecimal(long hex)throws Exception {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        String HEX = reader.readLine();
+    public static int hexToDecimal(long hex){
 
-        System.out.println(Integer.parseInt(HEX, 16));
-        return 1;
+
+        return Integer.parseInt(Long.toString(hex,10));
     }
 
     /**
@@ -121,35 +119,39 @@ public class HomeTask2 {
      * Если таких строк несколько, то вывести индекс
      * первой встретившейся из них.
      *
-     * @param input двумерный массив
+     * @param  двумерный массив
      * @return индекс строки
      */
-    public static int findMaxProduct(int[][] input) {
-        int ind = 0, max = 0, temp = 0;
-
-        for (int i = 0; i < input.length; i++) {
-            for (int j = 0; j < input[i].length; j++) {
-                input[i][j] = (int) (Math.random() * 10);
-                max = max + Math.abs(input[i][j]);
-                if (input[i][j] >= 0) {
-                    System.out.print(" ");
-                }
-                System.out.print(input[i][j] + " ");
-            }
-            System.out.println();
-
-            // System.out.println();
-            if (max > temp) {
-                ind = i + 1;
-                temp = max;
-            }
-            max = 0;
-
-            System.out.println("number string " + ind);
-
+    public static int getRowProduct(int[] arr) {
+        int prod = 1;
+        for (int i : arr) {
+            prod *= i;
         }
-        return ind;
+        return prod;
     }
+
+    public static int findMaxProduct(int[][] input) {
+        int[] rowProdArr = new int[input.length];
+        for (int i = 0; i < input.length; i++) {
+            rowProdArr[i] = getRowProduct(input[i]);
+        }
+        for (int i :rowProdArr) {
+            System.out.println("prod: "+i);
+        }
+
+        int max = rowProdArr[0], indexOfMaxValue = 0;
+        for (int i = 0; i < rowProdArr.length; i++) {
+            if (rowProdArr[i] > max) {
+                max = rowProdArr[i];
+                indexOfMaxValue = i+1;
+            }
+            System.out.println(indexOfMaxValue);
+        }
+
+
+        return indexOfMaxValue;
+    }
+
 
     /**
      * Выводит все простые числа из интервала от 2 до n.
@@ -159,24 +161,18 @@ public class HomeTask2 {
      */
     public static int[] getSimple(int n) {
         int[] arr = new int[n];
-        int qty,i,j;
-        qty =0;
-        i=2;
-        while(qty<arr.length){
-            isThatPrime:{
-                for (j=0;j<qty;j++){
-                    if (i%arr[j]==0){
-                        break isThatPrime;
+        nextPrime:
+            for (int i=2;i<arr.length;i++){
+                for (int j=2;j<i;j++){
+                    if (i%j==0){
+                        continue nextPrime;
                     }
-                    if (arr[j]*arr[j]>i)
-                        break;
                 }
-                System.out.println(arr[qty++]=i);
-            }
-            i++;
-        }
+                System.out.println(i);
 
-        return arr;
+            }
+
+      return arr;
     }
 
     // Рекурсивные методы. Реализовать их нужно с помощью рекурсии.
@@ -206,12 +202,15 @@ public class HomeTask2 {
      * @return
      */
     public static int product(int first, int second) {
-        if (first<second){
+        /*if (first<second){
             return product(second,first);
-        }
+        }*/
         int sum=0;
         for (int i=second;i>0;i--){
             sum+=first;
+        }
+        if (second<0){
+            sum+=first*second;
         }
         System.out.println(sum);
 
