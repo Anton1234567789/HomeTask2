@@ -1,6 +1,7 @@
 package org.sourceit;
 
 
+import java.math.BigInteger;
 
 public class HomeTask2 {
 
@@ -50,7 +51,15 @@ public class HomeTask2 {
             return 0;
         }
 
-        return Integer.parseInt(Long.toString(binary));
+       // int res=0;
+        String s = Long.toString(binary);
+        /*String b=new StringBuffer(s).reverse().toString();
+        for (int i=0;i<b.length(); i++){
+            res += Math.pow(2,i)*(b.charAt(i)=='1'? 1: 0);
+            System.out.print(b.charAt(i));
+        }*/
+
+        return Integer.parseInt(s,2);
     }
 
     /**
@@ -63,7 +72,9 @@ public class HomeTask2 {
         if(octal<0)
         return 0;
 
-        return Integer.parseInt(Long.toString(octal,10));
+        String s = Long.toString(octal);
+
+        return Integer.parseInt(s,8);
     }
 
     /**
@@ -75,8 +86,8 @@ public class HomeTask2 {
     public static int hexToDecimal(long hex){
         if(hex<0)
             return 0;
-
-        return Integer.parseInt(Long.toString(hex,10));
+        String s = Long.toString(hex);
+        return Integer.parseInt(s,16);
     }
 
     /**
@@ -149,14 +160,7 @@ public class HomeTask2 {
      */
     public static int[] getSimple(int n) {
         int[] arr = new int[n];
-        /*if (arr[n]==1){
-            return null;
-        }
-        for (int i = 2;i*i<=n;i++){
-            if (arr[i]%i==0){
-                return null;
-            }
-        }*/
+
         nextPrime:
             for (int i=2;i<arr.length;i++){
                 for (int j=2;j<i;j++){
@@ -182,12 +186,7 @@ public class HomeTask2 {
     public static long sum(int n) {
         System.out.println(n*(n+1)/2);
         return n*(n+1)/2;
-        /*long rec;
-        if(n==1)
-            return 1;
-        rec = sum(n-1)+n;
-        System.out.println("summa == " + rec);
-        return rec;*/
+
     }
 
     /**
@@ -198,9 +197,7 @@ public class HomeTask2 {
      * @return
      */
     public static int product(int first, int second) {
-        /*if (first<second){
-            return product(second,first);
-        }*/
+
         int sum=0;
         for (int i=second;i>0;i--){
             sum+=first;
