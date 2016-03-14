@@ -12,13 +12,13 @@ public class HomeTask2 {
      */
     public static long decimalToBinary(int number) {
 
-       /* if (number > 0) {
+        if (number > 0) {
             System.out.println("number " + number + " v binary = " + Integer.toBinaryString(number));
-        } else {
+        } else if(number<0){
             return 0;
-        }*/
+        }
 
-        System.out.println(Integer.toBinaryString(number));
+        /*System.out.println(Integer.toBinaryString(number));*/
         return number;
     }
 
@@ -62,7 +62,9 @@ public class HomeTask2 {
      * @return десятичное число
      */
     public static int binaryToDecimal(long binary) {
-
+        if(binary<0){
+            return 0;
+        }
 
         return Integer.parseInt(Long.toString(binary));
     }
@@ -74,7 +76,8 @@ public class HomeTask2 {
      * @return десятичное число
      */
     public static int octalToDecimal(long octal){
-
+        if(octal<0)
+        return 0;
 
         return Integer.parseInt(Long.toString(octal,10));
     }
@@ -86,7 +89,8 @@ public class HomeTask2 {
      * @return десятичное число
      */
     public static int hexToDecimal(long hex){
-
+        if(hex<0)
+            return 0;
 
         return Integer.parseInt(Long.toString(hex,10));
     }
@@ -161,6 +165,14 @@ public class HomeTask2 {
      */
     public static int[] getSimple(int n) {
         int[] arr = new int[n];
+        /*if (arr[n]==1){
+            return null;
+        }
+        for (int i = 2;i*i<=n;i++){
+            if (arr[i]%i==0){
+                return null;
+            }
+        }*/
         nextPrime:
             for (int i=2;i<arr.length;i++){
                 for (int j=2;j<i;j++){
