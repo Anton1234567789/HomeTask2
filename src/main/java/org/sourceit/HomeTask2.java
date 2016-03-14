@@ -12,14 +12,7 @@ public class HomeTask2 {
      */
     public static long decimalToBinary(int number) {
 
-        if (number > 0) {
-            System.out.println("number " + number + " v binary = " + Integer.toBinaryString(number));
-        } else if(number<0){
-            return 0;
-        }
-
-        /*System.out.println(Integer.toBinaryString(number));*/
-        return number;
+        return Integer.parseInt(Long.toString(number,2));
     }
 
     /**
@@ -29,12 +22,8 @@ public class HomeTask2 {
      * @return октальная форма числа
      */
     public static long decimalToOctal(int number) {
-        if (number > 0) {
-            System.out.println("number " + number + " v octal = " + Integer.toOctalString(number));
-        } else {
-            return 0;
-        }
-        return number;
+
+        return Integer.parseInt(Long.toString(number,8));
     }
 
     /**
@@ -45,13 +34,8 @@ public class HomeTask2 {
      */
     public static long decimalToHex(int number) {
 
-        if (number > 0) {
-            System.out.println("number " + number + " v hex = " + Integer.toHexString(number));
 
-        } else if (number<0){
-            return 0;
-        }
-        return 1;
+        return Integer.parseInt(Long.toString(number,16));
     }
 
 
