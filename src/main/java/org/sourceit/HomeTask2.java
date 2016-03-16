@@ -160,15 +160,19 @@ public class HomeTask2 {
      */
     public static int[] getSimple(int n) {
         int[] arr = new int[n];
-
+        int[] arr1;
         nextPrime:
             for (int i=2;i<arr.length;i++){
                 for (int j=2;j<i;j++){
                     if (i%j==0){
+                        arr1[i] = i;  // вот тут вот он ругаеться на инициализацию
                         continue nextPrime;
                     }
+
                 }
-                System.out.println(i);
+
+
+                System.out.print(i+" ");
 
             }
 
