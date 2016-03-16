@@ -1,7 +1,11 @@
 package org.sourceit;
 
 
+import java.lang.reflect.Array;
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
 
 public class HomeTask2 {
 
@@ -159,25 +163,45 @@ public class HomeTask2 {
      * @return массив простых чисел.
      */
     public static int[] getSimple(int n) {
-        int[] arr = new int[n];
-        int[] arr1;
-        nextPrime:
-            for (int i=2;i<arr.length;i++){
+     /*  int[] arr = new int[n];
+           nextPrime:
+            for (int i=2;i<=arr.length;i++){
                 for (int j=2;j<i;j++){
                     if (i%j==0){
-                        arr1[i] = i;  // вот тут вот он ругаеться на инициализацию
+                         // вот тут вот он ругаеться на инициализацию
                         continue nextPrime;
                     }
-
                 }
-
-
                 System.out.print(i+" ");
-
             }
+        return arr;*/
 
-      return arr;
+        boolean[] primes = new boolean[n+1];
+        Arrays.fill(primes, true);
+        primes[0] = false;
+        primes[1] = false;
+        for(int i = 2;i*i < n;i++){
+            if(primes[i]){
+                for(int j=i*i;j < n;j+=i){
+                    primes[j] = false;
+                }
+            }
+        }
+        List<Integer> array = new ArrayList<Integer>();
+        for(int i=0;i<n;i++){
+            if(primes[i]){
+                array.add(i);
+            }
+        }
+        int[] arr = new int[array.size()];
+        for (int i = 0; i < array.size(); i++) {
+            arr[i] = array.get(i);
+        }
+        return arr;
     }
+
+
+
 
     // Рекурсивные методы. Реализовать их нужно с помощью рекурсии.
 
