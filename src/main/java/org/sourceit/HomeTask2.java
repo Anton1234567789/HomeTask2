@@ -6,7 +6,7 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
-
+import java.util.*;
 public class HomeTask2 {
 
     /**
@@ -17,7 +17,19 @@ public class HomeTask2 {
      */
     public static long decimalToBinary(int number) {
 
-        return Integer.parseInt(Long.toString(number,2));
+        int b=0;
+        int i=0;
+        String temp = "";
+        while (number!=0){
+            b=number%2;
+            temp = b+temp;
+            number/=2;
+        }
+        i = Integer.parseInt(temp);
+        System.out.print(temp);
+
+        //return Integer.parseInt(Long.toString(number,2));
+        return i;
     }
 
     /**
@@ -27,8 +39,18 @@ public class HomeTask2 {
      * @return октальная форма числа
      */
     public static long decimalToOctal(int number) {
-
-        return Integer.parseInt(Long.toString(number,8));
+        int b=0;
+        int i=0;
+        String temp = "";
+        while (number!=0){
+            b=number%8;
+            temp = b+temp;
+            number/=8;
+        }
+        i = Integer.parseInt(temp);
+        System.out.print(temp);
+        //return Integer.parseInt(Long.toString(number,8));
+    return i;
     }
 
     /**
@@ -38,9 +60,18 @@ public class HomeTask2 {
      * @return хексовая форма числа
      */
     public static long decimalToHex(int number) {
-
-
-        return Integer.parseInt(Long.toString(number,16));
+        int b=0;
+        int i=0;
+        String temp = "";
+        while (number!=0){
+            b=number%16;
+            temp = b+temp;
+            number/=16;
+        }
+        i = Integer.parseInt(temp);
+        System.out.print(temp);
+        return i;
+        //return Integer.parseInt(Long.toString(number,16));
     }
 
 
@@ -51,19 +82,18 @@ public class HomeTask2 {
      * @return десятичное число
      */
     public static int binaryToDecimal(long binary) {
-        if(binary<0){
-            return 0;
+
+        long value;
+        int decimal = 0;
+        int exponent = 0;
+        while(binary > 0){
+            value = binary % 10;
+            binary /= 10;
+            value *= Math.pow(2, exponent);
+            decimal += value;
+            ++exponent;
         }
-
-       // int res=0;
-        String s = Long.toString(binary);
-        /*String b=new StringBuffer(s).reverse().toString();
-        for (int i=0;i<b.length(); i++){
-            res += Math.pow(2,i)*(b.charAt(i)=='1'? 1: 0);
-            System.out.print(b.charAt(i));
-        }*/
-
-        return Integer.parseInt(s,2);
+        return decimal;
     }
 
     /**
@@ -73,12 +103,18 @@ public class HomeTask2 {
      * @return десятичное число
      */
     public static int octalToDecimal(long octal){
-        if(octal<0)
-        return 0;
 
-        String s = Long.toString(octal);
-
-        return Integer.parseInt(s,8);
+        long value;
+        int decimal = 0;
+        int exponent = 0;
+        while(octal > 0){
+            value = octal % 10;
+            octal /= 10;
+            value *= Math.pow(8, exponent);
+            decimal += value;
+            ++exponent;
+        }
+        return decimal;
     }
 
     /**
@@ -88,10 +124,18 @@ public class HomeTask2 {
      * @return десятичное число
      */
     public static int hexToDecimal(long hex){
-        if(hex<0)
-            return 0;
-        String s = Long.toString(hex);
-        return Integer.parseInt(s,16);
+
+        long value;
+        int decimal = 0;
+        int exponent = 0;
+        while(hex > 0){
+            value = hex % 10;
+            hex /= 10;
+            value *= Math.pow(16, exponent);
+            decimal += value;
+            ++exponent;
+        }
+        return decimal;
     }
 
     /**
@@ -163,18 +207,6 @@ public class HomeTask2 {
      * @return массив простых чисел.
      */
     public static int[] getSimple(int n) {
-     /*  int[] arr = new int[n];
-           nextPrime:
-            for (int i=2;i<=arr.length;i++){
-                for (int j=2;j<i;j++){
-                    if (i%j==0){
-                         // вот тут вот он ругаеться на инициализацию
-                        continue nextPrime;
-                    }
-                }
-                System.out.print(i+" ");
-            }
-        return arr;*/
 
         boolean[] primes = new boolean[n+1];
         Arrays.fill(primes, true);
